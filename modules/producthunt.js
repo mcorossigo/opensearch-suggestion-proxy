@@ -3,7 +3,10 @@ let productHunt = {
         return true
     } ,
     parseResult: function (result) {
-        return true
+
+        console.log(result)
+
+        return "true"
     }
 }
 
