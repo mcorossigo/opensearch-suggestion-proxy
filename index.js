@@ -1,28 +1,15 @@
 const express = require('express')
 const searchEngines = require('./modules.js')
 
-function getResult(url, callback) {
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-
-    xhr.onload = function () {
-
-        callback(xhr.response)
-
-    };
-
-    xhr.send(null);
-
-}
-
 const app = express()
 const port = 3000
+
+const NUMBER_OF_SUGGESTIONS = 5
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/provider/:providerID', function (req, res) {
-    console.log(req);
+    // console.log(req);
 
     let provider = req.params.providerID
 
@@ -32,11 +19,7 @@ app.get('/provider/:providerID', function (req, res) {
             let query = req.query.q
             let providerObject = searchEngines[provider]
 
-            let url = providerObject.getURL(query)
-
-            getResult(url, (data) => {
-                let parsedData = providerObject.parseResult(data)
-
+            let url = providerObject.getSuggestion(query, {}, (parsedData) => {
                 res.send(parsedData)
             })
 
