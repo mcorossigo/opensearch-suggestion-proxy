@@ -76,6 +76,19 @@ function parseSuggestion(data, params = {}, callback) {
   callback(finalResult)
 }
 
-module.exports = {
-  getSuggestion
-};
+module.exports = (req, res) => {
+
+  const { query = false } = req.query
+
+  res.setHeader('Cache-Control', 'Cache-Control: s-maxage=1, stale-while-revalidate')
+
+  if (query) {
+
+    getSuggestion(query, {}, (parsedData) => {
+      res.status(200).json(parsedData)
+    })
+  } else {
+    res.status(404).json([])
+  }
+
+}

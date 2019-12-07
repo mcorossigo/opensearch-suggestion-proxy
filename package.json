@@ -2,13 +2,12 @@
   "name": "opensearch-suggestion-proxy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "now deploy ./src -n opensearch-suggestion-proxy",
+    "now-log": "now log https://opensearch-suggestion-proxy.matteocorossigo95.now.sh"
   },
   "author": "",
   "license": "MIT"
